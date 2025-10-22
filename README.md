@@ -4,7 +4,8 @@
 ---
 
 ## Project Photo
-![Claw Arm Image](/images/claw-arm.png)
+![claw-arm](https://github.com/user-attachments/assets/be2d33bb-eace-4dfe-882b-94cf22f86a6f)
+
 
 ## Features
 - Operate the robot via Serial Monitor.

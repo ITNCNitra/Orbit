@@ -4,10 +4,10 @@
 ---
 
 ## Project Photo
-
+![Claw Arm Image](/images/claw-arm.png)
 
 ## Features
-- Operate the robot from any device with a browser.
+- Operate the robot via Serial Monitor.
 - Supports both Arduino Uno/Nano and ESP8266 platforms.
 - Uses a Stepper Motor (28BYJ-48) for smooth, accurate 360-degree rotation of the arm's base.
 - Controls up to 4 Standard Hobby Servos for multi-joint articulation.
@@ -26,28 +26,38 @@
 ## Wiring Diagram
 
 ## How It Works
-1. The ESP8266 connects to the local Wi-Fi network using a pre-configured SSID and password.
-2. It hosts a simple webpage that displays controls for each joint.
-3. When a control button is pressed, the browser sends an HTTP request (e.g., /move?joint=gripper&action=open) to the ESP8266.
-4. The ESP8266 receives the command and executes the appropriate low-level motor function (either moveAngle for a servo or stepperStep for the base).
+1. The ESP8266 boots up and initializes all servo and stepper motor pins.
+2. It prints a control guide to the Serial Monitor showing which keys control each joint.
+3. The user controls the arm by typing commands in the Serial Monitor (e.g., q or w to open or close the gripper).
+4. The ESP8266 reads each incoming character and executes the matching motor function:
+    - `moveAngle()` adjusts the servo position (arm, S2, S3, S4).
+    - `stepperStep()` rotates the stepper motor base left or right.
 
 ---
 
 ## Getting Started
 **Phase 1: Firmware Setup and Upload**
-1. Choose the firmware file matching your hardware.
-2. Update Wi-Fi Credentials (ESP8266 only).
-    ```cpp
-    const char* ssid = "YOUR_WIFI_NAME";
-    const char* password = "YOUR_WIFI_PASSWORD";
-    ```
-3. Install Libraries (ESP8266 only).
-4. Upload the sketch to your ESP8266 using the Arduino IDE.
+1. Choose the firmware file matching your hardware (`arduino.ino` for Uno/Nano or `esp8266.ino` for NodeMCU).
+2. Open the file in Arduino IDE.
+3. Install required libraries:
+    - **For Arduino:** built-in Servo library.
+    - **For ESP8266:** install ESP8266_ISR_Servo from Library Manager.
+4. Connect your board via USB and select the correct port and board type.
+5. Upload the sketch.
 
-**Phase 2: Web Control Test and Operation**
-1. Wire Up Hardware.
-2. Get IP Address (e.g., http://192.168.1.100).
-3. Visit that IP in a browser (e.g., http://192.x.x.x). 
+**Phase 2: Serial Control Test and Operation**
+1. Wire up all servos and the stepper motor according to the defined pin mapping.
+2. Open the **Serial Monitor** (115200 baud) after uploading.
+3. The ESP prints control instructions like:
+    ```
+    Controls: 
+    arm: q(open) w(close) 
+    S2: a(backward) s(forward) 
+    S3: z(down) x(up) 
+    Stepper: o(left) p(right)
+    ```
+4. Type the corresponding keys in the Serial Monitor to move each joint or rotate the base.
+5. Observe servo and stepper responses in real-time — no Wi-Fi or web interface required.
 
 ## Contribute
 Want to improve this project? Contributions are welcome!

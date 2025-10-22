@@ -66,6 +66,6 @@ Want to improve this project? Contributions are welcome!
 2. Edit the code or docs
 3. Submit a Pull Request
 
-## Lincense
+## License
 This project is open-source under the **MIT License**.  
 Feel free to use, modify, and build upon it.

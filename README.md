@@ -1,5 +1,5 @@
 # Orbit
-> Web-controlled robotic claw arm
+> Serial Monitor controlled robotic claw arm
 
 ---
 
